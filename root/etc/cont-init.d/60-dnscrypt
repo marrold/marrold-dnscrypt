@@ -1,0 +1,18 @@
+#!/usr/bin/with-contenv bash
+
+CONFIG=/etc/dnscrypt-proxy/dnscrypt-proxy.toml
+
+echo 'Creating dnscrypt-proxy dirs'
+mkdir /var/cache/dnscrypt-proxy
+mkdir /var/log/dnscrypt-proxy
+
+echo 'Fixing dnscrypt-proxy permissions'
+chown -R abc:abc /var/log/dnscrypt-proxy
+chown -R abc:abc /var/cache/dnscrypt-proxy
+
+echo 'Updating dnscrypt-proxy config'
+
+if [ -n "${DNSCRYPT_SERVER_NAMES}" ]
+then
+    sed -r "s/^(# )?(server_names = ).+$/\2${DNSCRYPT_SERVER_NAMES}/" -i $CONFIG
+fi

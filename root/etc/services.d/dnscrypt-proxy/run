@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv bash
+
+exec \
+        s6-setuidgid abc dnscrypt-proxy --config /etc/dnscrypt-proxy/dnscrypt-proxy.toml 

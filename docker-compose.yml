@@ -1,0 +1,15 @@
+---
+version: "2.1"
+services:
+  dnscrypt:
+    image: dev-dnscrypt
+    container_name: dnscrypt
+    environment:
+      - PUID=5000
+      - PGID=5000
+      - TZ=Europe/London
+      - DNSCRYPT_SERVER_NAMES=['cloudflare']
+    ports:
+      - 53:5053
+      - 53:5053/udp
+    restart: unless-stopped
